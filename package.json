@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/blackbeardapp/compose-watch#readme",
   "dependencies": {
+    "debug": "^2.2.0",
     "nodemon": "^1.4.1",
     "optimist": "^0.6.1"
   }
