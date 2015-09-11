@@ -1,0 +1,26 @@
+{
+  "name": "compose-watch",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "compose-watch": "./bin/compose-watch.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blackbeardapp/compose-watch.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blackbeardapp/compose-watch/issues"
+  },
+  "homepage": "https://github.com/blackbeardapp/compose-watch#readme",
+  "dependencies": {
+    "nodemon": "^1.4.1",
+    "optimist": "^0.6.1"
+  }
+}
