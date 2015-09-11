@@ -1,7 +1,7 @@
 {
   "name": "compose-watch",
-  "version": "0.0.1",
-  "description": "",
+  "version": "1.0.0",
+  "description": "Watch docker-compose directories",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/blackbeardapp/compose-watch.git"
   },
-  "author": "",
+  "author": "Kevin Simper",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/blackbeardapp/compose-watch/issues"
