@@ -10,14 +10,16 @@ if(argv._.length !== 1) {
 }
 
 if(argv._.length === 1) {
-  var dockerComposeYaml = findFile('docker-compose.yml', process.cwd())
+  var file = 'docker-compose.yml'
+  var dir = findFile('docker-compose.yml', process.cwd())
   var app = argv._[0]
+  var composeYamlFile = dir + '/' + file
   var command = [
     '--exec "',
-    'docker-compose -f ' + dockerComposeYaml + ' stop -t 0 ' + app + ' && ',
-    'docker-compose -f ' + dockerComposeYaml + ' start ' + app + ' && ',
-    'docker-compose -f ' + dockerComposeYaml + ' logs ' + app + '"',
-    ' -w ' + app + '/'
+    'docker-compose -f ' + composeYamlFile + ' stop -t 0 ' + app + ' && ',
+    'docker-compose -f ' + composeYamlFile + ' start ' + app + ' && ',
+    'docker-compose -f ' + composeYamlFile + ' logs ' + app + '"',
+    ' -w ' + dir + '/' + app + '/'
   ].join('')
   debug('command', command)
   nodemon(command)
@@ -37,7 +39,7 @@ function findFile(name, dir) {
   debug('checking', filepath)
   try {
     fs.statSync(filepath)
-    return filepath
+    return path.resolve(dir)
   } catch (e) {
     return findFile(name, dir + '/..')
   }
