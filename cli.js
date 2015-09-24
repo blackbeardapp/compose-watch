@@ -1,11 +1,19 @@
-var argv = require('optimist').argv
+var minimist = require('minimist')
 var nodemon = require('nodemon')
 var path = require('path')
 var fs = require('fs')
 var debug = require('debug')('compose-watch')
+var argv = minimist(process.argv.slice(2), {
+  boolean: 'w'
+})
 
 if(argv._.length !== 1) {
-  var help = ['Usage: compose-watch appname']
+  var help = [
+    'Usage: compose-watch [-nw] appname',
+    '',
+    'Options:',
+    ' -nw\tDo not watch, just restart the app once'
+  ]
   console.log(help.join('\n'))
 }
 
@@ -14,15 +22,18 @@ if(argv._.length === 1) {
   var dir = findFile('docker-compose.yml', process.cwd())
   var app = argv._[0]
   var composeYamlFile = dir + '/' + file
-  var command = [
+  var commands = [
     '--exec "',
     'docker-compose -f ' + composeYamlFile + ' stop -t 0 ' + app + ' && ',
     'docker-compose -f ' + composeYamlFile + ' start ' + app + ' && ',
-    'docker-compose -f ' + composeYamlFile + ' logs ' + app + '"',
-    ' -w ' + dir + '/' + app + '/'
-  ].join('')
-  debug('command', command)
-  nodemon(command)
+    'docker-compose -f ' + composeYamlFile + ' logs ' + app,
+    '"'
+  ]
+  if(!argv.nw) {
+    commands.push(' -w ' + dir + '/' + app + '/')
+  }
+  debug('command', commands.join(''))
+  nodemon(commands.join(''))
 }
 
 var prev = ''
